@@ -1,0 +1,31 @@
+-- Getting started, take a look at the startups table:
+SELECT *
+FROM startups;
+-- Total number of companies in the table.
+SELECT COUNT(*)
+FROM startups;
+-- Total value of all companies in this table
+SELECT SUM(valuation)
+FROM startups;
+-- What is the highest amount raised by a startup?
+SELECT MAX(raised)
+FROM startups;
+-- What is the highest amount raised by a startup in as Seed funding?
+SELECT MAX(raised)
+FROM startups
+WHERE stage = 'Seed';
+-- What is the average valuation of all startups considered in the list by each category?
+SELECT category, Round (avg (valuation),2) as 'Avg valuation'
+FROM startups
+group by 1
+order by 2 desc;
+-- Identify name of each category with the total number of companies that belong to it, as long as there are at least 3 companies
+select category, count(*)
+from startups
+group by category
+having count(name) > 3;
+-- Average size of a startup in each location
+select location, avg (employees)
+from startups
+group by location;
+
